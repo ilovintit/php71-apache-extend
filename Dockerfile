@@ -1,8 +1,8 @@
 FROM ilovintit/php71-apache-with-node
 MAINTAINER ilovinti <ilovintit@gmail.com>
 COPY ./instantclient-basic-linux.x64-12.2.0.1.0.zip /
-RUN unzip /instantclient-basic-linux.x64-12.2.0.1.0.zip -d / && mv /instantclient_12_2 /var/instantclient
-RUN ln -s /var/instantclient/libclntsh.so.12.1 /var/instantclient/libclntsh.so
-RUN ln -s /var/instantclient/libocci.so.12.1 /var/instantclient/libocci.so
-RUN export LD_LIBRARY_PATH=/var/instantclient
+RUN mkdir -p /usr/lib/oracle/client64
+RUN unzip /instantclient-basic-linux.x64-12.2.0.1.0.zip -d / && mv /instantclient_12_2 /usr/lib/oracle/client64/lib
+RUN ln -s /usr/lib/oracle/client64/lib/libclntsh.so.12.1 /usr/lib/oracle/client64/lib/libclntsh.so
+RUN ln -s /usr/lib/oracle/client64/liblibocci.so.12.1 /usr/lib/oracle/client64/lib/libocci.so
 RUN pecl install oci8 && docker-php-ext-enable oci8
